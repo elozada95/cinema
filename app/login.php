@@ -49,8 +49,16 @@
                 <label for="dateh">Password:</label>
                 <input type="password" name="password" class="form-control"/>
                 <br>
-                <input class="btn btn-success col-lg-2 col-lg-offset-5" value="Continuar" name="submit" type="submit">
+                <input class="btn btn-success col-lg-2 col-lg-offset-5" value="Log in" name="submit" type="submit">
             </form>
+            <br>
+            <br>
+            <h6 class="col-lg-3 col-lg-offset-6">OR </h6>
+            <br>
+            <br>
+            <div class="col-lg-12">
+                <a class="btn btn-info col-lg-2 col-lg-offset-5" href="registro.php">Register</a>
+            </div>
         </div>
     </div>
 </body>
