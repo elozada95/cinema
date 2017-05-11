@@ -23,6 +23,15 @@ class User implements IUser {
     public function __construct(Database $db){
         $this->con = new $db;
     }
+    public function get(){
+        
+    }
+    public function save(){
+        
+    }
+    public function delete(){
+        
+    }
     public function setEmail($email){
         $this->email = $email;
     }
