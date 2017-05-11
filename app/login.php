@@ -10,7 +10,7 @@
         require_once "../models/User.php";
         session_start();
         function makelogin($inputemail, $inputpass){
-            $inputpass = sha1($inputpass);
+            $inputpass = ($inputpass);
             $db = new Database;
             $user = new User($db);
             $users = $user->getUsuario();

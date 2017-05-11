@@ -18,7 +18,7 @@
     ?>
     <div class="container">
         <div class="col-lg-12">
-            <h2 class="text-center text-primary">Admin Crud</h2>
+            <h2 class="text-center text-primary">Cinema Admin</h2>
             <div class="col-lg-12" style="margin-bottom: 100px">
                 <a class="btn btn-info btn-block" href="movies.php">Movies</a>
             </div>

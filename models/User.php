@@ -218,21 +218,14 @@ class User implements IUser {
             echo  $e->getMessage();
         }
     }
-    public function viewSchedule(){
+    public function viewMovie(){
         try{
-            if(!empty($this->id)){
-                $query = $this->con->prepare('select day,start,finish,type from hours where professor = ?');
+                $query = $this->con->prepare('select name,synopsis,releasedate,duration,gen,rating from movie where id = ?');
                 $query->bindParam(1, $this->id, PDO::PARAM_INT);
                 $query->execute();
                 $this->con->close();
                 return $query->fetchAll(PDO::FETCH_OBJ);
-            }
-            else{
-                $query = $this->con->prepare('SELECT * FROM student');
-                $query->execute();
-                $this->con->close();
-                return $query->fetchAll(PDO::FETCH_OBJ);
-            }
+            
         }
         catch(PDOException $e){
             echo  $e->getMessage();
@@ -354,17 +347,17 @@ class User implements IUser {
             echo  $e->getMessage();
         }
     }
-    public function getProfessor(){
+    public function getMovie(){
         try{
             if(is_int($this->id)){
-                $query = $this->con->prepare('SELECT id FROM professor order by id desc');
+                $query = $this->con->prepare('SELECT id,name FROM movie');
                 //$query->bindParam(1, $this->id, PDO::PARAM_INT);
                 $query->execute();
                 $this->con->close();
                 return $query->fetch(PDO::FETCH_OBJ);
             }
             else{
-                $query = $this->con->prepare('SELECT * FROM professor');
+                $query = $this->con->prepare('SELECT * FROM movie');
                 $query->execute();
                 $this->con->close();
                 return $query->fetchAll(PDO::FETCH_OBJ);
@@ -451,7 +444,7 @@ class User implements IUser {
         }
     }
     public static function baseurl() {
-         return stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . "/consultinghours/";
+         return stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . "/cinema/";
     }
     public function checkUser($user) {
         if( !$user ) {
