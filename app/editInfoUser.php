@@ -63,8 +63,10 @@
        </form>
      </div>
      <div class="col-lg-12" style="margin-bottom: 100px">
-      <br>
     </div>
+  </div>
+  <div class="col-lg-12" style="margin-bottom: 100px" align="center">
+                <a class="btn btn-info btn-block" align="center"  style="width:10%" href="usuario.php">Home</a>
   </div>
 </div>
 </body>
