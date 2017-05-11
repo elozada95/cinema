@@ -1,0 +1,44 @@
+CREATE TABLE usuar (
+    id               serial PRIMARY KEY CHECK(id>0),
+    name varchar(100),
+    surname varchar(100),
+    email varchar(100),
+    password varchar(100),
+    type int
+);
+
+CREATE TYPE clasif AS ENUM('AA','A','B','B15','C');
+
+CREATE TYPE genero AS ENUM('Drama','Comedy','Action','Sci-Fi','Fantasy','Horror','Romance','Musical','Suspenso');
+
+CREATE TYPE roomtype AS ENUM('regular','3D','IMAX','IMAX 3D','4DX');
+
+CREATE TABLE movie (
+    id               serial PRIMARY KEY CHECK(id>0),
+    name varchar(100),
+    synopsis varchar(500),
+    releasedate date,
+    duration int CHECK(duration > 0),
+    gen genero,
+    rating clasif,
+);
+
+CREATE TABLE room (
+	id               int PRIMARY KEY CHECK(id>0),
+	type roomtype,
+	price real,
+	numseats int
+);
+
+CREATE TABLE screening (
+    id               serial PRIMARY KEY CHECK(id>0),
+    idmovie		 int references movie(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    idroom		 int references room(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    sdate date,
+    stime time,
+);
+
+CREATE TABLE ticket(
+	id               serial PRIMARY KEY CHECK(id>0),
+	idscreening		 int references screening(id) ON DELETE CASCADE ON UPDATE CASCADE,
+);
