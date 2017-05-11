@@ -9,8 +9,8 @@
     <?php
     require_once "../models/User.php";
     session_start();
-    $paysheet = $_SESSION['paysheet'];
-    echo $paysheet;//no jala la peli correcta
+    $selmovie = filter_input(INPUT_POST, 'movie');
+    echo $selmovie;//no jala la peli correcta
     $type = $_SESSION['type'];
     
     if($type != 1)
@@ -18,14 +18,14 @@
         header("Location: logout.php");
     }
 
-    if(!$paysheet)
+    if(!$selmovie)
     {
         header("Location: logout.php");
     }
 
     $db = new Database;
     $user = new User($db);
-    $user->setId($paysheet);
+    $user->setId($selmovie);
     
     $users = $user->viewMovie();
     ?>
