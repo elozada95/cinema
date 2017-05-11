@@ -13,6 +13,13 @@ CREATE TYPE genero AS ENUM('Drama','Comedy','Action','Sci-Fi','Fantasy','Horror'
 
 CREATE TYPE roomtype AS ENUM('regular','3D','IMAX','IMAX 3D','4DX');
 
+CREATE TABLE room (
+	id               serial PRIMARY KEY CHECK(id>0),
+	type roomtype,
+	price real CHECK(price>0),
+	numseats int CHECK(numseats>0)
+);
+
 CREATE TABLE movie (
     id               serial PRIMARY KEY CHECK(id>0),
     name varchar(100),
@@ -23,19 +30,11 @@ CREATE TABLE movie (
     rating clasif
 );
 
-CREATE TABLE room (
-	id               int PRIMARY KEY CHECK(id>0),
-	type roomtype,
-	price real CHECK(price>0),
-	numseats int CHECK(numseats>0)
-);
-
 CREATE TABLE screening (
     id               serial PRIMARY KEY CHECK(id>0),
     idmovie		 int references movie(id) ON DELETE CASCADE ON UPDATE CASCADE,
     idroom		 int references room(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    sdate date,
-    stime time,
+    stime		 timestamp,
     isfull boolean
 );
 
@@ -49,7 +48,21 @@ CREATE TABLE ticket(
 INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'admin', 0);
 INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'secret', 1);
 
-INSERT INTO room(type, price, numseats) VALUES ()
+INSERT INTO room(type, price, numseats) VALUES ('4DX', 125, 70);
+INSERT INTO room(type, price, numseats) VALUES ('IMAX 3D', 110, 100);
+INSERT INTO room(type, price, numseats) VALUES ('IMAX 3D', 110, 100);
+INSERT INTO room(type, price, numseats) VALUES ('IMAX', 95, 100);
+INSERT INTO room(type, price, numseats) VALUES ('IMAX', 95, 100);
+INSERT INTO room(type, price, numseats) VALUES ('IMAX', 95, 100);
+INSERT INTO room(type, price, numseats) VALUES ('3D', 85, 50);
+INSERT INTO room(type, price, numseats) VALUES ('3D', 85, 50);
+INSERT INTO room(type, price, numseats) VALUES ('3D', 85, 50);
+INSERT INTO room(type, price, numseats) VALUES ('regular', 70, 50);
+INSERT INTO room(type, price, numseats) VALUES ('regular', 70, 50);
+INSERT INTO room(type, price, numseats) VALUES ('regular', 70, 50);
+INSERT INTO room(type, price, numseats) VALUES ('regular', 70, 50);
+INSERT INTO room(type, price, numseats) VALUES ('regular', 70, 50);
 
 INSERT INTO movie(name, synopsis, releasedate, duration, gen, rating) VALUES ('High School Musical', 'An extremely handsome basketball player decides to sing.', '2017-05-09', 103, 'Musical', 'A');
 
+INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (1, 1, '2017-05-11 10:30:00', FALSE);
