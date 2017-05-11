@@ -362,6 +362,26 @@ class User implements IUser {
             echo  $e->getMessage();
         }
     }
+    public function getScreening(){
+        try{
+            if(is_int($this->id)){
+                $query = $this->con->prepare('SELECT screening.id, movie.name, movie.rating, screening.idroom, room.type, room.price, screening.sdate, screening.stime, screening.isfull FROM screening, movie, room WHERE screening.idmovie = movie.id AND screening.idroom = room.id ORDER BY sdate, stime');
+                //$query->bindParam(1, $this->id, PDO::PARAM_INT);
+                $query->execute();
+                $this->con->close();
+                return $query->fetch(PDO::FETCH_OBJ);
+            }
+            else{
+                $query = $this->con->prepare('SELECT screening.id, movie.name, movie.rating, screening.idroom, room.type, room.price, screening.sdate, screening.stime, screening.isfull FROM screening, movie, room WHERE screening.idmovie = movie.id AND screening.idroom = room.id ORDER BY sdate, stime');
+                $query->execute();
+                $this->con->close();
+                return $query->fetchAll(PDO::FETCH_OBJ);
+            }
+        }
+        catch(PDOException $e){
+            echo  $e->getMessage();
+        }
+    }
     public function getUsuario(){
         try{
                 $query = $this->con->prepare('SELECT * FROM usuar order by id asc ');

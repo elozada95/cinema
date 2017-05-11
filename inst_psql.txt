@@ -34,7 +34,8 @@ CREATE TABLE screening (
     id               serial PRIMARY KEY CHECK(id>0),
     idmovie		 int references movie(id) ON DELETE CASCADE ON UPDATE CASCADE,
     idroom		 int references room(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    stime		 timestamp,
+    sdate        date,
+    stime		 time,
     isfull boolean
 );
 
@@ -66,4 +67,7 @@ INSERT INTO room(type, price, numseats) VALUES ('regular', 70, 50);
 INSERT INTO movie(name, synopsis, releasedate, duration, gen, rating) VALUES ('High School Musical', 'An extremely handsome basketball player decides to sing.', '2017-05-09', 103, 'Musical', 'A');
 INSERT INTO movie(name, synopsis, releasedate, duration, gen, rating) VALUES ('Alien: Covenant', 'Bound for a remote planet on the far side of the galaxy, members of the colony ship Covenant discover what they think to be an uncharted paradise.', '2017-05-12', 122, 'Horror', 'B15');
 
-INSERT INTO screening(idmovie, idroom, stime, isfull) VALUES (1, 1, '2017-05-11 10:30:00', FALSE);
+INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (1, 1, '2017-05-11', '10:30:00', FALSE);
+INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (1, 2, '2017-05-11', '16:30:00', FALSE);
+INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 5, '2017-05-12', '00:05:00', FALSE);
+INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 10, '2017-05-12', '13:00:00', FALSE);

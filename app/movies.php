@@ -22,6 +22,9 @@
     <div class="container" style="width:100%" align="center">
         <div class="col-lg-12" style="width:100%" align="center">
             <h2 class="text-center text-primary">Movies</h2>
+            <br>
+            <a class="btn btn-success btn-block" style="width:10%" href="admin.php">Add Movie</a>
+            <br>
             <div style="width:80%" align="center">
                 <table class="table table-striped table-bordered" align="center">
                     <thead>
@@ -45,7 +48,7 @@
                                 echo '<td>' .$user->rating. '</td>';
                                 echo '<td>';
                                 echo '&nbsp;';
-                                echo '<a class="btn btn-success" href="update.php? id='.$user->id.'">Update</a>';
+                                echo '<a class="btn btn-info" href="update.php? id='.$user->id.'">Update</a>';
                                 echo '</td>';
                                 echo '<td>';
                                 echo '&nbsp;';
