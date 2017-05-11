@@ -10,7 +10,6 @@
     require_once "../models/User.php";
     session_start();
     $selmovie = filter_input(INPUT_POST, 'movie');
-    echo $selmovie;//no jala la peli correcta
     $type = $_SESSION['type'];
     
     if($type != 1)

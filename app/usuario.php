@@ -13,7 +13,7 @@
     
         if($type != 1)
         {
-            header("Location:" . User::baseurl() . "app/logout.php");
+            header("Location: logout.php");
         }
     ?>
     <div class="container">
