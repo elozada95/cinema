@@ -120,24 +120,13 @@ class User implements IUser {
             //$new =('id from hours order by id desc LIMIT 1');
             //$new++;
             //$query =$this->con->prepare('INSERT INTO hours (id,day, professor,start,finish,type,period) values (10,"Friday",01326798,"19:00","20:00","officeHour",1');
-            $query = $this->con->prepare('UPDATE usuar SET email = ? WHERE id = ?');
+            $query = $this->con->prepare('UPDATE usuar SET email = ?,name = ?,surname = ? WHERE id = ?');
             //$query->bindParam(1,$new);
             $query->bindParam(1, $this->email, PDO::PARAM_STR);
-            $query->bindParam(2, $this->id, PDO::PARAM_INT);
+            $query->bindParam(2, $this->name, PDO::PARAM_STR);
+            $query->bindParam(3, $this->surname, PDO::PARAM_STR);
+            $query->bindParam(4, $this->id, PDO::PARAM_INT);
             $query->execute();
-            $this->con->close();
-            $query2;
-            if ($this->typeUser==2) {
-                $query2 = $this->con->prepare('UPDATE student SET name = ? WHERE id = ?');
-                $query2->bindParam(1, $this->name, PDO::PARAM_STR);
-                $query2->bindParam(2, $this->id, PDO::PARAM_INT);
-            }
-            if ($this->typeUser==1) {
-                $query2 = $this->con->prepare('UPDATE professor SET name = ? WHERE id = ?');
-                $query2->bindParam(1, $this->name, PDO::PARAM_STR);
-                $query2->bindParam(2, $this->id, PDO::PARAM_INT);
-            }
-            $query2->execute();
             $this->con->close();
         }
         catch(PDOException $e) {
@@ -190,6 +179,20 @@ class User implements IUser {
         }
     }
     //obtenemos usuarios de una tabla con postgreSql
+    public function viewReservations(){
+        try{
+            if(!empty($this->id)){
+                $query = $this->con->prepare('select idscreening,seatnumber from ticket where iduser = ?');
+                $query->bindParam(1, $this->id, PDO::PARAM_INT);
+                $query->execute();
+                $this->con->close();
+                return $query->fetchAll(PDO::FETCH_OBJ);
+            }
+        }
+        catch(PDOException $e){
+            echo  $e->getMessage();
+        }
+    }
     public function viewStudent(){
         try{
             if(!empty($this->id)){

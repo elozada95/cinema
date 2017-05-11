@@ -28,5 +28,5 @@ $user->setEmail($post->email);
 $user->setName($post->name);
 $user->setPassword($token);
 $user->saveUser();
-//header("Location:" . User::baseurl() . "app/login.php");
+header("Location: login.php");
 ?>

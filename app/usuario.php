@@ -10,7 +10,7 @@
         require_once "../models/User.php";
         session_start();
         $type = $_SESSION['type'];
-    
+        $paysheet = $_SESSION['paysheet'];
         if($type != 1)
         {
             header("Location: logout.php");
