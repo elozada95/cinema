@@ -20,14 +20,14 @@ CREATE TABLE movie (
     releasedate date,
     duration int CHECK(duration > 0),
     gen genero,
-    rating clasif,
+    rating clasif
 );
 
 CREATE TABLE room (
 	id               int PRIMARY KEY CHECK(id>0),
 	type roomtype,
-	price real,
-	numseats int
+	price real CHECK(price>0),
+	numseats int CHECK(numseats>0)
 );
 
 CREATE TABLE screening (
@@ -36,9 +36,20 @@ CREATE TABLE screening (
     idroom		 int references room(id) ON DELETE CASCADE ON UPDATE CASCADE,
     sdate date,
     stime time,
+    isfull boolean
 );
 
 CREATE TABLE ticket(
 	id               serial PRIMARY KEY CHECK(id>0),
+	iduser			 int references usuar(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	idscreening		 int references screening(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	seatnumber		 int CHECK(seatnumber>0)
 );
+
+INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'admin', 0);
+INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'secret', 1);
+
+INSERT INTO room(type, price, numseats) VALUES ()
+
+INSERT INTO movie(name, synopsis, releasedate, duration, gen, rating) VALUES ('High School Musical', 'An extremely handsome basketball player decides to sing.', '2017-05-09', 103, 'Musical', 'A');
+
