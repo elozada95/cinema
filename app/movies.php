@@ -26,12 +26,12 @@
                 <table class="table table-striped table-bordered" align="center">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th style="width:20%">Name</th>
                             <th>Synopsis</th>
-                            <th>Release Date</th>
-                            <th>Duration</th>
-                            <th>Genre</th>
-                            <th>Rating</th>
+                            <th style="width:10%">Release Date</th>
+                            <th style="width:5%">Duration</th>
+                            <th style="width:8%">Genre</th>
+                            <th style="width:7%">Rating</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +40,7 @@
                                 echo '<td>' .$user->name. '</td>';
                                 echo '<td>' .$user->synopsis. '</td>';
                                 echo '<td>' .$user->releasedate. '</td>';
-                                echo '<td>' .$user->duration. '</td>';
+                                echo '<td>' .$user->duration. ' min</td>';
                                 echo '<td>' .$user->gen. '</td>';
                                 echo '<td>' .$user->rating. '</td>';
                                 echo '<td>';
@@ -60,7 +60,7 @@
             <div class="col-lg-12" style="margin-bottom: 100px" align="center">
                 <br>
                 <br>
-                <a class="btn btn-info btn-block" align="center"  style="width:10%" href="usuario.php">Home</a>
+                <a class="btn btn-info btn-block" align="center"  style="width:10%" href="admin.php">Home</a>
             </div>
         </div>
     </div>
