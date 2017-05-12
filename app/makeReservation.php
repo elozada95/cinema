@@ -7,6 +7,7 @@
 </head>
 <body>
   <?php
+  $movid = filter_input(INPUT_POST, 'id');
   require_once "../models/User.php";
   session_start();
   $type = $_SESSION['type'];
@@ -18,6 +19,10 @@
   if(!$paysheet){
     header("Location: logout.php");
   }
+  if(!$movid){
+    header("Location: logout.php");
+  }
+  $_SESSION['movid'] = $movid;
   $db = new Database;
   $user = new User($db);
   ?>
@@ -27,9 +32,9 @@
       <div class="col-lg-6 col-lg-offset-3">
        <form action="make_reservation.php" method="post"> 
 
-        <label for="name">Seat number</label>
-         <input type="text" name="name" class="form-control"/>
-         <br> 
+        <label for="seatn">Seat number</label>
+         <input type="text" name="seatn" class="form-control"/>
+         <br>
          <input class="btn btn-success btn-block btn-md" type="submit" name="submit" value="Make reservation"></input>
        </form>
      </div>

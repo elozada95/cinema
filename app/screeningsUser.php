@@ -49,7 +49,10 @@
                                 echo '<td>' .$user->stime. '</td>';
                                 echo '<td>';
                                 echo '&nbsp;';
-                                echo '<a class="btn btn-success" href="makeReservation.php? id='.$user->id.'">Make reservation</a>';
+                                echo '<form action="makeReservation.php" method="post">';
+                                    echo '<input type="hidden" name="id" value="'.$user->id.'">';
+                                    echo '<input class="btn btn-success" value="Make Reservation" type="submit">';
+                                echo '</form>';
                                 echo '</td>';
                             echo '</tr>';
                         }

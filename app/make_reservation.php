@@ -9,23 +9,32 @@ if (empty($_POST['submit']))
 $args = array(
 	'name'  => FILTER_SANITIZE_STRING,
 );
+$seatno = filter_input(INPUT_POST, 'seatn');
+if(!$seatno){
+	header("Location: logout.php");
+}
 session_start();
 $type = $_SESSION['type'];
- $paysheet = $_SESSION['paysheet'];
+$paysheet = $_SESSION['paysheet'];
+$movid = $_SESSION['movid'];
 if($type != 1)
 {
 	header("Location: logout.php");
 }
+if(!$paysheet){
+	header("Location: logout.php");
+}
+if(!$movid){
+    header("Location: logout.php");
+  }
 echo "<pre>";
 print_r($args); 
 $post = (object)filter_input_array(INPUT_POST, $args);
 $db = new Database;
 $user = new User($db);
-$user->setSurname($post->surname);
-echo $post->surname;
-$user->setEmail($post->email);
-$user->setName($post->name);
-$user->setPassword($token);
-$user->saveUser();
-header("Location: login.php");
+$user->setId($paysheet);
+$user->setIdmovie($movid);
+$user->setSeat($seatno);
+$user->saveTicket();
+header("Location: reservations.php");
 ?>

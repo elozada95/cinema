@@ -23,6 +23,7 @@ class User implements IUser {
     private $time;
     private $idmovie;
     private $room;
+    private $seat;
     public function __construct(Database $db){
         $this->con = new $db;
     }
@@ -88,8 +89,8 @@ class User implements IUser {
     public function setSynopsis($synopsis){
         $this->synopsis = $synopsis;
     }
-    public function setRelease($synopsi){
-        $this->synopsis = $synopsis;
+    public function setSeat($seat){
+        $this->seat = $seat;
     }
     //insertamos usuarios en una tabla con postgreSql
 
@@ -144,6 +145,24 @@ class User implements IUser {
             $query->bindParam(2, $this->room, PDO::PARAM_STR);
             $query->bindParam(3, $this->date, PDO::PARAM_STR);
             $query->bindParam(4, $this->time, PDO::PARAM_STR);
+            $query->execute();
+            $this->con->close();
+            
+        }
+        catch(PDOException $e) {
+            echo  $e->getMessage();
+        }
+    }
+    public function saveTicket() {
+        try{
+            //$new =('id from hours order by id desc LIMIT 1');
+            //$new++;
+            //$query =$this->con->prepare('INSERT INTO hours (id,day, professor,start,finish,type,period) values (10,"Friday",01326798,"19:00","20:00","officeHour",1');
+            $query = $this->con->prepare('INSERT INTO ticket(iduser, idscreening, seatnumber) VALUES (?, ?, ?)');
+            //$query->bindParam(1,$new);
+            $query->bindParam(1, $this->id, PDO::PARAM_STR);
+            $query->bindParam(2, $this->idmovie, PDO::PARAM_STR);
+            $query->bindParam(3, $this->seat, PDO::PARAM_STR);
             $query->execute();
             $this->con->close();
             
@@ -221,26 +240,6 @@ class User implements IUser {
             if(!empty($this->id)){
                 $query = $this->con->prepare('select idscreening,seatnumber from ticket where iduser = ?');
                 $query->bindParam(1, $this->id, PDO::PARAM_INT);
-                $query->execute();
-                $this->con->close();
-                return $query->fetchAll(PDO::FETCH_OBJ);
-            }
-        }
-        catch(PDOException $e){
-            echo  $e->getMessage();
-        }
-    }
-    public function viewStudent(){
-        try{
-            if(!empty($this->id)){
-                $query = $this->con->prepare('select hours.professor as "Profesor",(date)date,hours.start,hours.finish,topic from availabledates,hours where officehour = hours.id and student = ?');
-                $query->bindParam(1, $this->id, PDO::PARAM_INT);
-                $query->execute();
-                $this->con->close();
-                return $query->fetchAll(PDO::FETCH_OBJ);
-            }
-            else{
-                $query = $this->con->prepare('SELECT * FROM student');
                 $query->execute();
                 $this->con->close();
                 return $query->fetchAll(PDO::FETCH_OBJ);
