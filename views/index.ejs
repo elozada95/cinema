@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cinema</title>
+</head>
+<body>
+  <h1>Cinema comment Section</h1>
+  <ul class="quotes">
+  <% for(var i=0; i<quotes.length; i++) {%>
+    <li class="quote">
+      <span><%= quotes[i].name %></span>
+      <span><%= quotes[i].quote %></span>
+    </li>
+  <% } %>
+  </ul>
+
+  <form action="/quotes" method="POST">
+    <input type="text" placeholder="User" name="name">
+    <input type="text" placeholder="Comment" name="quote">
+    <button type="submit">Submit</button>
+  </form>
+  <div>
+  <h2>Replace last quote written by JP with a quote written by Dan</h2>
+  <button id="update"> Dan invades! </button>
+  <div>
+  <h2>Delete Dan first quote</h2>
+  <button id="delete"> Delete first Dan quote </button>
+</div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

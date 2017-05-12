@@ -26,9 +26,6 @@
                 <a class="btn btn-info btn-block" href="checkMovies.php">Movies</a>
             </div>
             <div class="col-lg-12" style="margin-bottom: 100px">
-                <a class="btn btn-info btn-block" href="upcomingMoviesView.ejs">Upcoming Movies</a>
-            </div>
-            <div class="col-lg-12" style="margin-bottom: 100px">
                 <a class="btn btn-info btn-block" href="editInfoUser.php">Edit your info</a>
             </div>
             <div class="col-lg-12" style="margin-bottom: 100px">

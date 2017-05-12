@@ -23,9 +23,6 @@
                 <a class="btn btn-info btn-block" href="movies.php">Movies</a>
             </div>
             <div class="col-lg-12" style="margin-bottom: 100px">
-                <a class="btn btn-info btn-block" href="upcomingMovies.ejs">Upcoming Movies</a>
-            </div>
-            <div class="col-lg-12" style="margin-bottom: 100px">
                 <a class="btn btn-info btn-block" href="screenings.php">Screenings</a>
             </div>
             <div class="col-lg-12" style="margin-bottom: 100px">

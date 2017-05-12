@@ -59,6 +59,11 @@
             <div class="col-lg-12">
                 <a class="btn btn-info col-lg-2 col-lg-offset-5" href="registro.php">Register</a>
             </div>
+            <br>
+            <br>
+            <div class="col-lg-12">
+                <a class="btn btn-info col-lg-2 col-lg-offset-5" href="http://127.0.1.1:8005">Comment Section</a>
+            </div>
         </div>
     </div>
 </body>
