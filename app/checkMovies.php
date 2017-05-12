@@ -30,6 +30,9 @@
         {
             header("Location: logout.php");
         }
+        if(!$paysheet){
+            header("Location: logout.php");
+        }
         $db = new Database;
         $user = new User($db);
         $users = $user->getMovie();

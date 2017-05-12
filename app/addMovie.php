@@ -8,6 +8,13 @@
 <body>
   <?php
   require_once "../models/User.php";
+  session_start();
+        $type = $_SESSION['type'];
+    
+        if($type != 0)
+        {
+            header("Location: logout.php");
+        }
   $db = new Database;
   $user = new User($db);
   ?>

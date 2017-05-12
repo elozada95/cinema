@@ -7,13 +7,15 @@ if (empty($_POST['submit']))
 }
 
 session_start();
-$type = $_SESSION['type'];
- $paysheet = $_SESSION['paysheet'];
-
-if($type != 1)
-{
-	header("Location: logout.php");
-}
+        $type = $_SESSION['type'];
+        $paysheet = $_SESSION['paysheet'];
+        if($type != 1)
+        {
+            header("Location: logout.php");
+        }
+        if(!$paysheet){
+            header("Location: logout.php");
+        }
 
 $args = array(
 	'id'  => FILTER_SANITIZE_STRING,

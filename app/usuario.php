@@ -15,6 +15,9 @@
         {
             header("Location: logout.php");
         }
+        if(!$paysheet){
+            header("Location: logout.php");
+        }
     ?>
     <div class="container">
         <div class="col-lg-12">
