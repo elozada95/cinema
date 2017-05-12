@@ -49,7 +49,7 @@ CREATE TABLE ticket(
 INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'admin', 0);
 INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'secret', 1);
 
-INSERT INTO room(type, price, numseats) VALUES ('4DX', 125, 70);
+INSERT INTO room(type, price, numseats) VALUES ('4DX', 125, 100);
 INSERT INTO room(type, price, numseats) VALUES ('IMAX 3D', 110, 100);
 INSERT INTO room(type, price, numseats) VALUES ('IMAX 3D', 110, 100);
 INSERT INTO room(type, price, numseats) VALUES ('IMAX', 95, 100);
@@ -71,3 +71,5 @@ INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (1, 1, '2017
 INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (1, 2, '2017-05-11', '16:30:00', FALSE);
 INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 5, '2017-05-12', '00:05:00', FALSE);
 INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 10, '2017-05-12', '13:00:00', FALSE);
+
+INSERT INTO ticket(iduser, idscreening, seatnumber) VALUES (2, 3, 22);

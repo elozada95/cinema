@@ -92,6 +92,9 @@ class User implements IUser {
     public function setSeat($seat){
         $this->seat = $seat;
     }
+    public function setRelease($release){
+        $this->release = $release;
+    }
     //insertamos usuarios en una tabla con postgreSql
 
     public function saveUser() {
@@ -302,34 +305,6 @@ class User implements IUser {
             echo  $e->getMessage();
         }
     }
-    public function viewAppointments(){
-        try{
-            if(!empty($this->professor)){
-                $query = $this->con->prepare('select student, topic, dateh, start, finish from asesorias where professor = ? order by dateh');
-                $query->bindParam(1, $this->professor, PDO::PARAM_INT);
-                $query->execute();
-                $this->con->close();
-                return $query->fetchAll(PDO::FETCH_OBJ);
-            }
-        }
-        catch(PDOException $e){
-            echo  $e->getMessage();
-        }
-    }
-    public function viewAppointmentsSt(){
-        try{
-            if(!empty($this->id)){
-                $query = $this->con->prepare('select professor, topic, dateh, start, finish from asesorias where student = ? order by dateh');
-                $query->bindParam(1, $this->id, PDO::PARAM_INT);
-                $query->execute();
-                $this->con->close();
-                return $query->fetchAll(PDO::FETCH_OBJ);
-            }
-        }
-        catch(PDOException $e){
-            echo  $e->getMessage();
-        }
-    }
     public function viewAppointmentsWeek(){
         try{
             if(!empty($this->professor)){
@@ -410,6 +385,19 @@ class User implements IUser {
             echo  $e->getMessage();
         }
     }
+    public function getTicketForScreening(){
+        try{
+                $query = $this->con->prepare('SELECT * FROM ticket WHERE idscreening = ? ORDER BY seatnumber');
+                //$query->bindParam(1, $this->id, PDO::PARAM_INT);
+                $query->bindParam(1, $this->idmovie, PDO::PARAM_STR);
+                $query->execute();
+                $this->con->close();
+                return $query->fetchAll(PDO::FETCH_OBJ);
+        }
+        catch(PDOException $e){
+            echo  $e->getMessage();
+        }
+    }
 
     public function getSinAdmin(){
         try{
@@ -424,7 +412,7 @@ class User implements IUser {
         }
     }
 
-     public function deleteUsuario(){
+    public function deleteUsuario(){
         try{
             $query = $this->con->prepare('DELETE FROM usuar WHERE id = ?');
             $query->bindParam(1, $this->id, PDO::PARAM_INT);
