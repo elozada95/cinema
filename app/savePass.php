@@ -31,7 +31,7 @@ $db = new Database;
 $user = new User($db);
 //ponerle sha1
 //$user->setPassword(sha1($post->password));
-$user->setPassword(($post->password));
+$user->setPassword(sha1($post->password));
 $user->setId($idusr);
 $user->updatePassword();
 header("Location: usuario.php");

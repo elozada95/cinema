@@ -46,8 +46,8 @@ CREATE TABLE ticket(
 	seatnumber		 int CHECK(seatnumber>0)
 );
 
-INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'admin', 0);
-INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'secret', 1);
+INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'fdca75a453d421df522bae6b221200d9e2386b13', 0);
+INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4', 1);
 
 INSERT INTO room(type, price, numseats) VALUES ('4DX', 125, 100);
 INSERT INTO room(type, price, numseats) VALUES ('IMAX 3D', 110, 100);
