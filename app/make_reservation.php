@@ -31,6 +31,7 @@ echo "<pre>";
 print_r($args); 
 $post = (object)filter_input_array(INPUT_POST, $args);
 $db = new Database;
+$buleano = 0;
 $db->beginTransaction();
 $user = new User($db);
 $user->setId($paysheet);
@@ -40,12 +41,22 @@ $users = $user->getTicketForScreening();
 foreach( $users as $user ) {
 	if($user->seatnumber == $seatno){
 		echo "SE REPITE ALV";
-		$db->rollBack();
-	}
-	else{
-		$user->saveTicket();
-		$db->commit();
+		$buleano = 1;
 	}
 }
-//header("Location: reservations.php");
+$usera = new User($db);
+$usera->setId($paysheet);
+$usera->setIdmovie($movid);
+$usera->setSeat($seatno);
+if($buleano == 0){
+	$usera->saveTicket();
+}
+if($buleano == 1){
+	$db->rollBack();
+	header("Location: screeningsUser.php");
+}
+else{
+	$db->commit();
+	header("Location: reservations.php");
+}
 ?>
