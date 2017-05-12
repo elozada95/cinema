@@ -37,10 +37,10 @@
             <div class="col-lg-12" style="margin-bottom: 100px">
                 <a class="btn btn-info btn-block" href="reservations.php">Reservations</a>
             </div>
-            <div class="col-lg-12" style="margin-bottom: 100px">
+            <div class="col-lg-12" align="center" style="margin-bottom: 100px">
                 <br>
                 <br>
-                <a class="btn btn-info btn-block" href="logout.php">Logout</a>
+                <a class="btn btn-danger" align="center" href="logout.php">Logout</a>
             </div>
         </div>
     </div>
