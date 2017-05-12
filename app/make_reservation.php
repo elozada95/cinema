@@ -31,10 +31,21 @@ echo "<pre>";
 print_r($args); 
 $post = (object)filter_input_array(INPUT_POST, $args);
 $db = new Database;
+$db->beginTransaction();
 $user = new User($db);
 $user->setId($paysheet);
 $user->setIdmovie($movid);
 $user->setSeat($seatno);
-$user->saveTicket();
-header("Location: reservations.php");
+$users = $user->getTicketForScreening();
+foreach( $users as $user ) {
+	if($user->seatnumber == $seatno){
+		echo "SE REPITE ALV";
+		$db->rollBack();
+	}
+	else{
+		$user->saveTicket();
+		$db->commit();
+	}
+}
+//header("Location: reservations.php");
 ?>
