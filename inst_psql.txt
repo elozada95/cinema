@@ -46,6 +46,35 @@ CREATE TABLE ticket(
 	seatnumber		 int CHECK(seatnumber>0)
 );
 
+CREATE OR REPLACE FUNCTION tickets()
+RETURNS TRIGGER AS $boo$
+declare 
+    total integer;
+    limite integer;
+BEGIN
+    total= (select  COUNT(*) from ticket WHERE idscreening=new.idscreening);
+    limite= (SELECT room.numseats FROM ticket, screening, room WHERE ticket.id = new.id AND screening.id = ticket.idscreening AND screening.idroom = room.id ORDER BY seatnumber);
+    IF(limite<=total) THEN
+    UPDATE screening SET isfull = 't' WHERE id = new.idscreening;
+    END IF;
+    RETURN NEW;
+END;
+$boo$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER tickets
+    BEFORE INSERT ON ticket
+    FOR EACH ROW
+    EXECUTE PROCEDURE tickets();
+    
+CREATE OR REPLACE FUNCTION boletosPorFuncion(i integer) RETURNS integer AS $$
+declare 
+    boletos integer;
+    BEGIN
+        boletos = count(*) from ticket where idscreening = i;
+        RETURN boletos;
+    END;
+$$ LANGUAGE plpgsql;
+
 INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'admin', 0);
 INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'secret', 1);
 
