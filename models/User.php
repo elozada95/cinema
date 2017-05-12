@@ -192,6 +192,42 @@ class User implements IUser {
             echo  $e->getMessage();
         }
     }
+    public function updateMovie() {
+        try{
+            //$new =('id from hours order by id desc LIMIT 1');
+            //$new++;
+            //$query =$this->con->prepare('INSERT INTO hours (id,day, professor,start,finish,type,period) values (10,"Friday",01326798,"19:00","20:00","officeHour",1');
+            $query = $this->con->prepare('UPDATE movie SET name = ?,synopsis = ?,releasedate = ?,duration=? WHERE id = ?');
+            //$query->bindParam(1,$new);
+            $query->bindParam(1, $this->name, PDO::PARAM_STR);
+            $query->bindParam(2, $this->synopsis, PDO::PARAM_STR);
+            $query->bindParam(3, $this->release, PDO::PARAM_STR);
+            $query->bindParam(4, $this->duration, PDO::PARAM_INT);
+            $query->bindParam(5, $this->id, PDO::PARAM_INT);
+            $query->execute();
+            $this->con->close();
+        }
+        catch(PDOException $e) {
+            echo  $e->getMessage();
+        }
+    }
+    public function updateScreening() {
+        try{
+            //$new =('id from hours order by id desc LIMIT 1');
+            //$new++;
+            //$query =$this->con->prepare('INSERT INTO hours (id,day, professor,start,finish,type,period) values (10,"Friday",01326798,"19:00","20:00","officeHour",1');
+            $query = $this->con->prepare('UPDATE screening SET sdate = ?,stime=? WHERE id = ?');
+            //$query->bindParam(1,$new);
+            $query->bindParam(1, $this->date, PDO::PARAM_STR);
+            $query->bindParam(2, $this->time, PDO::PARAM_STR);;
+            $query->bindParam(3, $this->id, PDO::PARAM_INT);
+            $query->execute();
+            $this->con->close();
+        }
+        catch(PDOException $e) {
+            echo  $e->getMessage();
+        }
+    }
     public function updatePassword() {
         try{
             //$new =('id from hours order by id desc LIMIT 1');
