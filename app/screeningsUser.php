@@ -15,6 +15,9 @@
         {
             header("Location: logout.php");
         }
+        if(!$paysheet){
+            header("Location: logout.php");
+        }
         $db = new Database;
         $user = new User($db);
         $users = $user->getScreening();
@@ -44,7 +47,7 @@
                                 echo '<td>' .$user->rating. '</td>';
                                 echo '<td>' .$user->idroom. '</td>';
                                 echo '<td>' .$user->type. '</td>';
-                                echo '<td>' .$user->price. '</td>';
+                                echo '<td>$' .$user->price. '</td>';
                                 echo '<td>' .$user->sdate. '</td>';
                                 echo '<td>' .$user->stime. '</td>';
                                 echo '<td>';

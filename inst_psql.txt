@@ -14,10 +14,10 @@ CREATE TYPE genero AS ENUM('Drama','Comedy','Action','Sci-Fi','Fantasy','Horror'
 CREATE TYPE roomtype AS ENUM('regular','3D','IMAX','IMAX 3D','4DX');
 
 CREATE TABLE room (
-	id               serial PRIMARY KEY CHECK(id>0),
-	type roomtype,
-	price real CHECK(price>0),
-	numseats int CHECK(numseats>0)
+    id               serial PRIMARY KEY CHECK(id>0),
+    type roomtype,
+    price real CHECK(price>0),
+    numseats int CHECK(numseats>0)
 );
 
 CREATE TABLE movie (
@@ -32,51 +32,22 @@ CREATE TABLE movie (
 
 CREATE TABLE screening (
     id               serial PRIMARY KEY CHECK(id>0),
-    idmovie		 int references movie(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    idroom		 int references room(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    idmovie      int references movie(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    idroom       int references room(id) ON DELETE CASCADE ON UPDATE CASCADE,
     sdate        date,
-    stime		 time,
+    stime        time,
     isfull boolean
 );
 
 CREATE TABLE ticket(
-	id               serial PRIMARY KEY CHECK(id>0),
-	iduser			 int references usuar(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	idscreening		 int references screening(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	seatnumber		 int CHECK(seatnumber>0)
+    id               serial PRIMARY KEY CHECK(id>0),
+    iduser           int references usuar(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    idscreening      int references screening(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    seatnumber       int CHECK(seatnumber>0)
 );
 
-CREATE OR REPLACE FUNCTION tickets()
-RETURNS TRIGGER AS $boo$
-declare 
-    total integer;
-    limite integer;
-BEGIN
-    total= (select  COUNT(*) from ticket WHERE idscreening=new.idscreening);
-    limite= (SELECT room.numseats FROM ticket, screening, room WHERE ticket.id = new.id AND screening.id = ticket.idscreening AND screening.idroom = room.id ORDER BY seatnumber);
-    IF(limite<=total) THEN
-    UPDATE screening SET isfull = 't' WHERE id = new.idscreening;
-    END IF;
-    RETURN NEW;
-END;
-$boo$ LANGUAGE 'plpgsql';
-
-CREATE TRIGGER tickets
-    BEFORE INSERT ON ticket
-    FOR EACH ROW
-    EXECUTE PROCEDURE tickets();
-    
-CREATE OR REPLACE FUNCTION boletosPorFuncion(i integer) RETURNS integer AS $$
-declare 
-    boletos integer;
-    BEGIN
-        boletos = count(*) from ticket where idscreening = i;
-        RETURN boletos;
-    END;
-$$ LANGUAGE plpgsql;
-
-INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'admin', 0);
-INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'secret', 1);
+INSERT INTO usuar(name, surname, email, password, type) VALUES ('admin', 'admin', 'admin', 'fdca75a453d421df522bae6b221200d9e2386b13', 0);
+INSERT INTO usuar(name, surname, email, password, type) VALUES ('Enrique', 'Lozada', 'lozada@mail.com', 'e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4', 1);
 
 INSERT INTO room(type, price, numseats) VALUES ('4DX', 125, 100);
 INSERT INTO room(type, price, numseats) VALUES ('IMAX 3D', 110, 100);
@@ -101,4 +72,9 @@ INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (1, 2, '2017
 INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 5, '2017-05-12', '00:05:00', FALSE);
 INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 10, '2017-05-12', '13:00:00', FALSE);
 
+BEGIN TRANSACTION;
 INSERT INTO ticket(iduser, idscreening, seatnumber) VALUES (2, 3, 22);
+COMMIT;
+
+CREATE VIEW movieName AS
+SELECT name FROM movie;

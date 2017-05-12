@@ -15,13 +15,10 @@ echo "<pre>";
 print_r($args); 
 $post = (object)filter_input_array(INPUT_POST, $args);
 $db = new Database;
-$token = substr(uniqid(rand(), true),0,16);
+$tokensin = substr(uniqid(rand(), true),0,16);
 //mandar token por mail
 //encriptar token
-//$token = sha1($token);
-//$token = ($token);
-//hacer que sea token y no secretsss
-$token = "secret";
+$token = sha1($tokensin);
 $user = new User($db);
 $user->setSurname($post->surname);
 echo $post->surname;
@@ -45,7 +42,7 @@ $mail->addAddress($post->email);
 $mail->addReplyTo('elozadav95@gmail.com', 'Cinema');
 
 $mail->Subject = 'Cinema Account';
-$mail->Body    = "Your login token is: \r\n \r\n" . $token . "\r\n \r\nPlease use it as your password for your first login and then change it.";
+$mail->Body    = "Your login token is: \r\n \r\n" . $tokensin . "\r\n \r\nPlease use it as your password for your first login and then change it.";
 
 $mail->send();
 
