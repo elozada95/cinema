@@ -23,7 +23,7 @@
         <div class="col-lg-12" style="width:100%" align="center">
             <h2 class="text-center text-primary">Screenings</h2>
             <br>
-            <a class="btn btn-success btn-block" style="width:10%" href="admin.php">Add Screening</a>
+            <a class="btn btn-success btn-block" style="width:10%" href="addScreening.php">Add Screening</a>
             <br>
             <div style="width:80%" align="center">
                 <table class="table table-striped table-bordered" align="center">
@@ -46,11 +46,11 @@
                                 echo '<td>' .$user->stime. '</td>';
                                 echo '<td>';
                                 echo '&nbsp;';
-                                echo '<a class="btn btn-info" href="update.php? id='.$user->id.'">Update</a>';
+                                echo '<a class="btn btn-info" href="updateScreening.php? id='.$user->id.'">Update</a>';
                                 echo '</td>';
                                 echo '<td>';
                                 echo '&nbsp;';
-                                echo '<a class="btn btn-danger" href="delete.php?id='.$user->id.'">Delete</a>';
+                                echo '<a class="btn btn-danger" href="deleteScreening.php?id='.$user->id.'">Delete</a>';
                                 echo '</td>';
                             echo '</tr>';
                         }

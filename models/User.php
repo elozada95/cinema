@@ -18,8 +18,11 @@ class User implements IUser {
     private $synopsis;
     private $release;
     private $duration;
-    private $genre;
+    private $genere;
     private $rating;
+    private $time;
+    private $idmovie;
+    private $room;
     public function __construct(Database $db){
         $this->con = new $db;
     }
@@ -34,6 +37,24 @@ class User implements IUser {
     }
     public function setEmail($email){
         $this->email = $email;
+    }
+    public function setTime($time){
+        $this->time = $time;
+    }
+    public function setRoom($room){
+        $this->room = $room;
+    }
+    public function setIdmovie($idmovie){
+        $this->idmovie = $idmovie;
+    }
+    public function setGenere($genere){
+        $this->genere = $genere;
+    }
+    public function setDuration($duration){
+        $this->duration = $duration;
+    }
+    public function setRating($rating){
+        $this->rating = $rating;
     }
     public function setName($name){
         $this->name = $name;
@@ -58,8 +79,8 @@ class User implements IUser {
     {
         $this->tipo = $tipo;
     }
-    public function setDate($sdate){
-        $this->sdate = $sdate;
+    public function setDate($date){
+        $this->date = $date;
     }
     public function setStart($start){
         $this->start = $start;
@@ -83,6 +104,46 @@ class User implements IUser {
             $query->bindParam(2, $this->surname, PDO::PARAM_STR);
             $query->bindParam(3, $this->email, PDO::PARAM_STR);
             $query->bindParam(4, $this->password, PDO::PARAM_STR);
+            $query->execute();
+            $this->con->close();
+            
+        }
+        catch(PDOException $e) {
+            echo  $e->getMessage();
+        }
+    }
+    public function saveMovie() {
+        try{
+            //$new =('id from hours order by id desc LIMIT 1');
+            //$new++;
+            //$query =$this->con->prepare('INSERT INTO hours (id,day, professor,start,finish,type,period) values (10,"Friday",01326798,"19:00","20:00","officeHour",1');
+            $query = $this->con->prepare('INSERT INTO movie(name, synopsis, releasedate, duration, gen, rating) VALUES (?,?,?,?,?,?)');
+            //$query->bindParam(1,$new);
+            $query->bindParam(1, $this->name, PDO::PARAM_STR);
+            $query->bindParam(2, $this->synopsis, PDO::PARAM_STR);
+            $query->bindParam(3, $this->date, PDO::PARAM_STR);
+            $query->bindParam(4, $this->duration, PDO::PARAM_STR);
+            $query->bindParam(5, $this->genere, PDO::PARAM_STR);
+            $query->bindParam(6, $this->rating, PDO::PARAM_STR);
+            $query->execute();
+            $this->con->close();
+            
+        }
+        catch(PDOException $e) {
+            echo  $e->getMessage();
+        }
+    }
+    public function saveScreening() {
+        try{
+            //$new =('id from hours order by id desc LIMIT 1');
+            //$new++;
+            //$query =$this->con->prepare('INSERT INTO hours (id,day, professor,start,finish,type,period) values (10,"Friday",01326798,"19:00","20:00","officeHour",1');
+            $query = $this->con->prepare('INSERT INTO screening(idmovie, idroom, sdate, stime) VALUES (?,?,?,?)');
+            //$query->bindParam(1,$new);
+            $query->bindParam(1, $this->idmovie, PDO::PARAM_STR);
+            $query->bindParam(2, $this->room, PDO::PARAM_STR);
+            $query->bindParam(3, $this->date, PDO::PARAM_STR);
+            $query->bindParam(4, $this->time, PDO::PARAM_STR);
             $query->execute();
             $this->con->close();
             
@@ -120,25 +181,6 @@ class User implements IUser {
             $query->bindParam(2, $this->id, PDO::PARAM_INT);
             $query->execute();
             $this->con->close();
-        }
-        catch(PDOException $e) {
-            echo  $e->getMessage();
-        }
-    }
-    public function saveMovie() {
-        try{
-            //$new =('id from hours order by id desc LIMIT 1');
-            //$new++;
-            //$query =$this->con->prepare('INSERT INTO hours (id,day, professor,start,finish,type,period) values (10,"Friday",01326798,"19:00","20:00","officeHour",1');
-            $query = $this->con->prepare('INSERT INTO movie(name, synopsis, releasedate, duration, gen, rating) VALUES (?,?,?,?,?,?)');
-            //$query->bindParam(1,$new);
-            $query->bindParam(1, $this->name, PDO::PARAM_STR);
-            $query->bindParam(2, $this->surname, PDO::PARAM_STR);
-            $query->bindParam(3, $this->email, PDO::PARAM_STR);
-            $query->bindParam(4, $this->password, PDO::PARAM_STR);
-            $query->execute();
-            $this->con->close();
-            
         }
         catch(PDOException $e) {
             echo  $e->getMessage();
@@ -386,6 +428,30 @@ class User implements IUser {
      public function deleteUsuario(){
         try{
             $query = $this->con->prepare('DELETE FROM usuar WHERE id = ?');
+            $query->bindParam(1, $this->id, PDO::PARAM_INT);
+            $query->execute();
+            $this->con->close();
+            return true;
+        }
+        catch(PDOException $e){
+            echo  $e->getMessage();
+        }
+    }
+    public function deleteMovie(){
+        try{
+            $query = $this->con->prepare('DELETE FROM movie WHERE id = ?');
+            $query->bindParam(1, $this->id, PDO::PARAM_INT);
+            $query->execute();
+            $this->con->close();
+            return true;
+        }
+        catch(PDOException $e){
+            echo  $e->getMessage();
+        }
+    }
+    public function deleteScreening(){
+        try{
+            $query = $this->con->prepare('DELETE FROM screening WHERE id = ?');
             $query->bindParam(1, $this->id, PDO::PARAM_INT);
             $query->execute();
             $this->con->close();

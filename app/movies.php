@@ -23,7 +23,7 @@
         <div class="col-lg-12" style="width:100%" align="center">
             <h2 class="text-center text-primary">Movies</h2>
             <br>
-            <a class="btn btn-success btn-block" style="width:10%" href="admin.php">Add Movie</a>
+            <a class="btn btn-success btn-block" style="width:10%" href="addMovie.php">Add Movie</a>
             <br>
             <div style="width:80%" align="center">
                 <table class="table table-striped table-bordered" align="center">
