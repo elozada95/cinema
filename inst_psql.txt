@@ -72,4 +72,10 @@ INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (1, 2, '2017
 INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 5, '2017-05-12', '00:05:00', FALSE);
 INSERT INTO screening(idmovie, idroom, sdate, stime, isfull) VALUES (2, 10, '2017-05-12', '13:00:00', FALSE);
 
+BEGIN TRANSACTION;
 INSERT INTO ticket(iduser, idscreening, seatnumber) VALUES (2, 3, 22);
+COMMIT;
+
+CREATE VIEW movieName AS
+    SELECT name FROM movie;
+
